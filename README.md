@@ -1,160 +1,118 @@
 # 🤖 Autonomous Agentic AI Research System
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
-[![LangChain](https://img.shields.io/badge/LangChain-Agent_Framework-green.svg)](https://python.langchain.com/)
-[![LangGraph](https://img.shields.io/badge/LangGraph-Stateful_Agents-orange.svg)](https://langchain-ai.github.io/langgraph/)
-[![FAISS](https://img.shields.io/badge/FAISS-Vector_Search-red.svg)](https://github.com/facebookresearch/faiss)
-[![Groq](https://img.shields.io/badge/Groq-Llama_3.3_70B-black.svg)](https://groq.com/)
+<div align="center">
+  <img src="https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.13" />
+  <img src="https://img.shields.io/badge/LangChain-Agent_Framework-1C3C3A?style=for-the-badge&logo=chainlink&logoColor=white" alt="LangChain" />
+  <img src="https://img.shields.io/badge/LangGraph-Stateful_Agents-FF6F00?style=for-the-badge&logo=network&logoColor=white" alt="LangGraph" />
+  <img src="https://img.shields.io/badge/FAISS-Vector_Search-00599C?style=for-the-badge&logo=facebook&logoColor=white" alt="FAISS" />
+  <img src="https://img.shields.io/badge/Groq-Llama_3.3_70B-f3f3f3?style=for-the-badge&logo=groq&logoColor=black" alt="Groq" />
+</div>
 
-> **Final Capstone Project of the CBSOT Internship**
+<br />
 
-An **Agentic AI Research Assistant** that autonomously discovers, analyzes, summarizes, and compares research papers through intelligent tool selection and conversational reasoning.
-
-Unlike traditional RAG systems that simply retrieve documents, this project leverages **LangGraph**, **LangChain**, and **Groq Llama 3.3 70B** to build a **stateful AI agent** capable of deciding which tools to use, maintaining conversation memory, performing semantic search, extracting keywords, comparing papers, and generating structured outputs.
-
----
-
-# ✨ Features
-
-* 🧠 Stateful conversation memory using MemorySaver
-* 🔍 Semantic research paper retrieval using FAISS
-* 📚 Dense embeddings with Sentence Transformers
-* 📝 AI-powered paper summarization
-* 🏷️ Automatic keyword extraction using KeyBERT
-* 📊 Intelligent comparison between research papers
-* 🛠️ Custom LangChain tools with tool calling
-* 💬 Multi-turn conversational interface
-* ⚡ High-speed inference using Groq Llama 3.3 70B
-* 📄 Structured report generation
+> **🎓 CBSOT Agentic AI Internship — Capstone Project 3**
+>
+> An **Autonomous Agentic AI Research Assistant** that discovers, analyzes, summarizes, and compares scientific papers through stateful memory and intelligent tool-calling capabilities.
 
 ---
 
-# System Architecture
+## 🌟 Key Features
 
-```text
-                     User Query
-                          │
-                          ▼
-              LangGraph Agent Workflow
-                          │
-             Conversation Memory
-                (MemorySaver)
-                          │
-                          ▼
-                Groq Llama 3.3 70B
-                          │
-                Autonomous Reasoning
-                          │
-          ┌───────────────┼────────────────┐
-          │               │                │
-          ▼               ▼                ▼
-   Semantic Search   Keyword Tool   Paper Comparison
-      (FAISS)          (KeyBERT)        (LLM)
-          │               │                │
-          └───────────────┼────────────────┘
-                          │
-                          ▼
-               Response Generation
-                          │
-                          ▼
-                 Final AI Response
+* **🧠 Stateful Conversation Memory**: Powered by LangGraph's `MemorySaver` to retain contextual history across complex multi-turn chats.
+* **🔍 Semantic Search & Indexing**: Employs **FAISS** vector database for sub-millisecond retrieval of papers from a 15,000+ dataset.
+* **📚 Sentence Transformers**: Utilizes `all-MiniLM-L6-v2` dense embeddings to perform high-accuracy mathematical similarity search.
+* **📝 Deep summarization**: Built-in **BART** pipeline (`facebook/bart-large-cnn`) to distill research abstracts into highly readable summaries.
+* **🏷️ Keyphrase Extraction**: Automatically extracts density-based keywords from texts using **KeyBERT**.
+* **📊 Paper Comparison Matrix**: Autonomous comparative LLM reasoning that evaluates research papers side-by-side using key architectural parameters.
+* **📁 Report Export Utility**: Automatically formats and saves generated research reports directly to local files.
+
+---
+
+## 📐 System Architecture
+
+The following diagram illustrates the flow of queries through our stateful LangGraph agent:
+
+```mermaid
+graph TD
+    User([User Query]) --> Agent[LangGraph Agent Workflow]
+    Agent --> Memory[(Conversation Memory<br>MemorySaver)]
+    Agent --> LLM[Groq Llama 3.3 70B]
+    LLM --> Reasoning{Autonomous Reasoning}
+    
+    Reasoning -->|Tool Call| Search[Semantic Search<br>FAISS]
+    Reasoning -->|Tool Call| Keywords[Keyword Extraction<br>KeyBERT]
+    Reasoning -->|Tool Call| Compare[Paper Comparison<br>LLM]
+    Reasoning -->|Tool Call| Save[Save Report<br>File System]
+    
+    Search --> Response[Response Synthesis]
+    Keywords --> Response
+    Compare --> Response
+    Save --> Response
+    
+    Response --> Final[Final Response to User]
+    style Agent fill:#1f2937,stroke:#3b82f6,stroke-width:2px,color:#fff
+    style LLM fill:#111827,stroke:#10b981,stroke-width:2px,color:#fff
+    style Reasoning fill:#312e81,stroke:#8b5cf6,stroke-width:2px,color:#fff
 ```
 
 ---
 
-# 🚀 Tech Stack
+## 🛠️ Tech Stack & Ecosystem
 
-### AI & LLM
-
-* Groq API
-* Llama 3.3 70B Versatile
-* LangChain
-* LangGraph
-
-### NLP
-
-* Sentence Transformers
-* Hugging Face Transformers
-* KeyBERT
-
-### Retrieval
-
-* FAISS Vector Database
-* Dense Embeddings
-* Semantic Search
-
-### Development
-
-* Python
-* Pandas
-* NumPy
-* Jupyter Notebook
+| Layer | Component | Description |
+| :--- | :--- | :--- |
+| **Agent Core** | LangGraph & LangChain | Manages custom tool calling nodes, state flow graphs, and memory buffers. |
+| **Inference Engine** | Groq (Llama 3.3 70B) | Powers reasoning, tool selection, and paper comparison tasks. |
+| **Vector DB** | FAISS (Facebook AI Similarity Search) | Stores and indexes 384-dimensional document embeddings. |
+| **NLP Models** | Hugging Face Transformers & KeyBERT | Tokenization, BART-based summarization, and keyphrase extraction. |
+| **Data Engine** | Pandas & NumPy | Cleans, structures, and processes raw scientific paper datasets. |
 
 ---
 
-# 📦 Installation
+## 🚀 Quick Start & Installation
 
-### Clone the repository
-
+### 1. Clone the repository
 ```bash
 git clone https://github.com/Rohitdey45/CBSOT_Project_3.git
-
 cd CBSOT_Project_3
 ```
 
-### Install dependencies
-
+### 2. Set up Virtual Environment & Dependencies
 ```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate on Windows
+.\venv\Scripts\activate
+
+# Install dependencies
 pip install -r Requirements.txt
 ```
 
-### Create a `.env` file
-
+### 3. Set up Environment Variables
+Create a file named `.env` in the root directory:
 ```env
-api = your_groq_api_key
+api=gsk_your_groq_api_key
 ```
 
-### Run
-
-Open the Jupyter Notebook and execute the cells sequentially.
-
----
-
-# 🎯 Learning Outcomes
-
-This project helped me gain practical experience with:
-
-* Agentic AI Systems
-* LangGraph Workflows
-* LangChain Tool Calling
-* Memory-based AI Agents
-* Retrieval-Augmented Generation (RAG)
-* Vector Databases (FAISS)
-* Semantic Search
-* Research Paper Intelligence Systems
-* Prompt Engineering
-* Large Language Models
-
----
-
-# 🏆 Internship
-
-This project was developed as the **third and final capstone project** of the **CBSOT Agentic AI Internship**.
-
-The objective was to build a practical Agentic AI application capable of autonomous reasoning, intelligent tool usage, conversational memory, and semantic information retrieval using modern LLM frameworks.
-
----
-
-# 🙏 Acknowledgements
-
-A heartfelt thanks to **CBSOT** and all the mentors for their continuous guidance and support throughout the internship. This capstone project provided an opportunity to explore modern Agentic AI architectures and apply them to solving real-world research challenges.
+### 4. Run the Agent
+You can run the python script directly:
+```bash
+python CBSOT_Project_3.py
+```
+Or launch Jupyter to view the interactive notebook:
+```bash
+jupyter notebook CBSOT_Project_3.ipynb
+```
 
 ---
 
 ## 👨‍💻 Author
 
-**Rohit Dey** 
+**Rohit Dey**
 
 ---
 
-## ⭐ If you found this project interesting, consider giving it a star!
+<div align="center">
+  <sub>Developed for the CBSOT Agentic AI Internship. If you found this project helpful, give it a ⭐!</sub>
+</div>
