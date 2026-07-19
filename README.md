@@ -97,7 +97,7 @@ Unlike traditional RAG systems that simply retrieve documents, this project leve
 ### Clone the repository
 
 ```bash
-git clone https://github.com/PaarthGarg008/CBSOT_Project_3.git
+git clone https://github.com/Rohitdey45/CBSOT_Project_3.git
 
 cd CBSOT_Project_3
 ```
@@ -153,7 +153,7 @@ A heartfelt thanks to **CBSOT** and all the mentors for their continuous guidanc
 
 ## 👨‍💻 Author
 
-**Paarth Garg** 
+**Rohit Dey** 
 
 ---
 
